@@ -7,6 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        /* Base styles for body and container to ensure overall responsiveness */
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f0f4f8; /* Light blue-gray background */
@@ -14,23 +15,23 @@
             justify-content: center;
             align-items: flex-start; /* Align to start to prevent extreme vertical centering on short content */
             min-height: 100vh;
-            padding: 2rem;
+            padding: 2rem; /* Responsive padding around the main content */
             box-sizing: border-box;
         }
         .container {
-            max-width: 900px;
-            width: 100%;
+            max-width: 900px; /* Max width for desktop */
+            width: 100%; /* Full width on smaller screens */
             background-color: #ffffff;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            padding: 2.5rem;
+            padding: 2.5rem; /* Consistent padding inside the container */
             box-sizing: border-box;
         }
         .card {
             background-color: #edf2f7; /* Lighter blue-gray for cards */
             border-radius: 15px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
+            padding: 1.5rem; /* Padding inside each card */
+            margin-bottom: 1.5rem; /* Space between cards */
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
             transition: transform 0.2s ease-in-out;
         }
@@ -48,8 +49,72 @@
             margin-bottom: 0.5rem;
         }
         .icon {
-                margin-right: 0.75rem;
+            margin-right: 0.75rem;
             color: #4299e1; /* Medium blue for icons */
+        }
+
+        /* Modal specific styles for responsiveness */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            max-width: 600px; /* Max width for modal content */
+            width: 90%; /* Responsive width for modal */
+            max-height: 80%; /* Limit modal height */
+            overflow-y: auto; /* Enable scrolling for long content */
+            position: relative;
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+        }
+        .modal-overlay.show .modal-content {
+            transform: translateY(0);
+        }
+        .close-button {
+            position: absolute;
+            top: 1rem;
+            right: 1.2rem;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #718096; /* Gray color */
+            transition: color 0.2s ease;
+        }
+        .close-button:hover {
+            color: #2d3748; /* Darker gray on hover */
+        }
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 2rem auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
@@ -100,6 +165,9 @@
                     <span class="icon">🏞️</span>
                     <p><span class="font-semibold">観光:</span> 天草方面、熊本市内</p>
                 </div>
+                <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg mt-4 w-full transition duration-300 ease-in-out transform hover:scale-105" onclick="generateTouristSpotDetails('天草方面、熊本市内')">
+                    ✨観光地の詳細を生成✨
+                </button>
             </div>
         </div>
 
@@ -127,6 +195,9 @@
                     <span class="icon">🏯</span>
                     <p><span class="font-semibold">観光:</span> 軍艦島、長崎市内、雲仙方面</p>
                 </div>
+                <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg mt-4 w-full transition duration-300 ease-in-out transform hover:scale-105" onclick="generateTouristSpotDetails('軍艦島、長崎市内、雲仙方面')">
+                    ✨観光地の詳細を生成✨
+                </button>
             </div>
         </div>
 
@@ -157,6 +228,9 @@
                 <p class="text-sm text-gray-500 mt-2">
                     ※マニラ往路はビジネス、復路はエコノミーでの利用を想定しています。
                 </p>
+                <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg mt-4 w-full transition duration-300 ease-in-out transform hover:scale-105" onclick="generateTouristSpotDetails('ボラカイ島、マニラ市内')">
+                    ✨観光地の詳細を生成✨
+                </button>
             </div>
         </div>
 
@@ -177,5 +251,72 @@
             これで130,000マイルを最大限に活用し、3つの素晴らしい旅行が楽しめます！😊
         </p>
     </div>
+
+    <!-- Modal for displaying generated content -->
+    <div id="detailModalOverlay" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-button" onclick="closeModal()">&times;</button>
+            <h3 class="text-xl font-bold text-blue-800 mb-4" id="modalTitle">観光地の詳細</h3>
+            <div id="modalContent">
+                <div class="loading-spinner"></div>
+                <p class="text-center text-gray-600 mt-4">情報を生成中...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to open the modal
+        function openModal() {
+            document.getElementById('detailModalOverlay').classList.add('show');
+        }
+
+        // Function to close the modal
+        function closeModal() {
+            document.getElementById('detailModalOverlay').classList.remove('show');
+            document.getElementById('modalContent').innerHTML = '<div class="loading-spinner"></div><p class="text-center text-gray-600 mt-4">情報を生成中...</p>'; // Reset content
+        }
+
+        async function generateTouristSpotDetails(touristSpots) {
+            openModal(); // Open modal and show loading
+            const modalContentDiv = document.getElementById('modalContent');
+            modalContentDiv.innerHTML = '<div class="loading-spinner"></div><p class="text-center text-gray-600 mt-4">AIが観光地の詳細を生成しています...</p>';
+
+            // Constructing a detailed prompt for the LLM
+            const prompt = `${touristSpots}の観光地について、それぞれの主要な見どころと魅力を300字程度で簡潔に教えてください。具体的に、どのような体験ができるか、なぜ訪れる価値があるのかを強調してください。`;
+
+            let chatHistory = [];
+            chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+            const payload = { contents: chatHistory };
+            const apiKey = ""; // If you want to use models other than gemini-2.0-flash or imagen-3.0-generate-002, provide an API key here. Otherwise, leave this as-is.
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(`API error: ${response.status} ${response.statusText} - ${JSON.stringify(errorData)}`);
+                }
+
+                const result = await response.json();
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    modalContentDiv.innerHTML = `<p class="text-gray-800 leading-relaxed">${text}</p>`;
+                } else {
+                    modalContentDiv.innerHTML = '<p class="text-red-600">情報の生成に失敗しました。もう一度お試しください。</p>';
+                    console.error("Unexpected API response structure:", result);
+                }
+            } catch (error) {
+                modalContentDiv.innerHTML = `<p class="text-red-600">エラーが発生しました: ${error.message}</p>`;
+                console.error("Error calling Gemini API:", error);
+            }
+        }
+    </script>
 </body>
 </html>
