@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANAマイル利用 旅行プラン提案</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Light blue-gray background */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align to start to prevent extreme vertical centering on short content */
+            min-height: 100vh;
+            padding: 2rem;
+            box-sizing: border-box;
+        }
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background-color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 2.5rem;
+            box-sizing: border-box;
+        }
+        .card {
+            background-color: #edf2f7; /* Lighter blue-gray for cards */
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .section-title {
+            color: #2c5282; /* Darker blue for titles */
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        .detail-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        .icon {
+                margin-right: 0.75rem;
+            color: #4299e1; /* Medium blue for icons */
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="container">
+        <h1 class="text-4xl font-extrabold text-center text-blue-800 mb-8 leading-tight">
+            ✈️ ANAマイルを活用した旅行プラン提案 ✈️
+        </h1>
+
+        <!-- Overall Summary Section -->
+        <div class="card mb-8">
+            <h2 class="text-2xl section-title mb-4">マイル利用概要</h2>
+            <p class="text-gray-700 text-lg mb-2">
+                <span class="font-semibold text-blue-600">総マイル:</span> 130,000マイル
+            </p>
+            <p class="text-gray-700 text-lg mb-4">
+                <span class="font-semibold text-blue-600">ANAゴールドカード特典:</span> 60,000マイル → 102,000スカイコインに交換 (<span class="font-bold text-green-600">交換レート1.6倍</span>、国内航空券購入に利用)
+            </p>
+            <p class="text-gray-700 text-lg mb-4">
+                <span class="font-semibold text-blue-600">特典航空券利用:</span> 66,000マイル (東京 ↔ マニラ 特典航空券に利用)
+            </p>
+            <p class="text-gray-700 text-lg">
+                残りのマイルとスカイコインを組み合わせて、3回の旅行に分けて満喫しましょう！
+            </p>
+        </div>
+
+        <!-- Trip 1 Section -->
+        <div class="card">
+            <h2 class="text-2xl section-title">第1回旅行: 九州の自然を満喫</h2>
+            <div class="text-gray-700 text-lg mt-4">
+                <div class="detail-item">
+                    <span class="icon">🗓️</span>
+                    <p><span class="font-semibold">日程:</span> 10月25日(金) → 10月27日(日)</p>
+                </div>
+                <div class="detail-item">
+                    <span class="icon">📍</span>
+                    <p><span class="font-semibold">路線:</span> 東京(羽田) → 熊本 → 東京(羽田)</p>
+                </div>
+                <div class="detail-item">
+                    <span class="icon">💰</span>
+                    <p><span class="font-semibold">航空券費用:</span> 52,160円（2名分）</p>
+                </div>
+                <div class="detail-item">
+                    <span class="icon">👨‍👩‍👧‍👦</span>
+                    <p><span class="font-semibold">人数:</span> 2名</p>
+                </div>
+                <div class="detail-item">
+                    <span class="icon">🏞️</span>
+                    <p><span class="font-semibold">観光:</span> 天草方面、熊本市内</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trip 2 Section -->
+        <div class="card">
+            <h2 class="text-2xl section-title">第2回旅行: 歴史と美食の街へ</h2>
+            <div class="text-gray-700 text-lg mt-4">
+                <div class="detail-item">
+                    <span class="icon">🗓️</span>
+                    <p><span class="font-semibold">日程:</span> 11月29日(金) → 12月1日(日)</p>
+                </div>
+                <div class="detail-item">
+                    <span class="icon">📍</span>
+                    <p><span class="font-semibold">路線:</span> 東京(羽田) → 長崎 → 東京(羽田)</p>
+                </div>
+                <div class="detail-item">
+                    <span class="icon">💰</span>
+                    <p><span class="font-semibold">航空券費用:</span> 52,840円（2名分）</p>
+                </div>
+                <div class="detail-item">
+                    <span class="icon">👨‍👩‍👧‍👦</span>
+                    <p><span class="font-semibold">人数:</span> 2名</p>
+                </div>
+                <div class="detail-item">
+                    <span class="icon">🏯</span>
+                    <p><span class="font-semibold">観光:</span> 軍艦島、長崎市内、雲仙方面</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trip 3 Section -->
+        <div class="card">
+            <h2 class="text-2xl section-title">第3回旅行: 常夏のフィリピンへ</h2>
+            <div class="text-gray-700 text-lg mt-4">
+                <div class="detail-item">
+                    <span class="icon">🗓️</span>
+                    <p><span class="font-semibold">日程:</span> 12月25日(水) → 12月30日(月)</p>
+                </div>
+                <div class="detail-item">
+                    <span class="icon">📍</span>
+                    <p><span class="font-semibold">路線:</span> 東京(羽田) → マニラ（ビジネス）<br>マニラ → 東京(羽田)（エコノミー）</p>
+                </div>
+                <div class="detail-item">
+                    <span class="icon">💰</span>
+                    <p><span class="font-semibold">航空券費用:</span> 66,000マイル + 55,960円（手数料）</p>
+                </div>
+                <div class="detail-item">
+                    <span class="icon">👨‍👩‍👧‍👦</span>
+                    <p><span class="font-semibold">人数:</span> 2名</p>
+                </div>
+                <div class="detail-item">
+                    <span class="icon">🏝️</span>
+                    <p><span class="font-semibold">観光:</span> ボラカイ島、マニラ市内</p>
+                </div>
+                <p class="text-sm text-gray-500 mt-2">
+                    ※マニラ往路はビジネス、復路はエコノミーでの利用を想定しています。
+                </p>
+            </div>
+        </div>
+
+        <!-- Domestic Trip Options Section -->
+        <div class="card">
+            <h2 class="text-2xl section-title">その他の国内旅行の候補地</h2>
+            <p class="text-gray-700 text-lg mt-4 mb-4">
+                上記のプラン以外にも、これらの魅力的な国内行き先も検討可能です。
+            </p>
+            <ul class="list-disc list-inside text-gray-700 text-lg space-y-1">
+                <li><span class="font-semibold">愛媛:</span> 道後温泉で歴史ある温泉を楽しむ</li>
+                <li><span class="font-semibold">島根:</span> 出雲大社で神聖な体験を</li>
+                <li><span class="font-semibold">北海道:</span> 洞爺湖の絶景と温泉でリラックス</li>
+            </ul>
+        </div>
+
+        <p class="text-center text-gray-600 text-lg mt-8">
+            これで130,000マイルを最大限に活用し、3つの素晴らしい旅行が楽しめます！😊
+        </p>
+    </div>
+</body>
+</html>
