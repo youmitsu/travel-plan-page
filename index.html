@@ -7,7 +7,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Base styles for body and container to ensure overall responsiveness */
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f0f4f8; /* Light blue-gray background */
@@ -53,68 +52,44 @@
             color: #4299e1; /* Medium blue for icons */
         }
 
-        /* Modal specific styles for responsiveness */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.6);
+        /* Image gallery styles */
+        .image-gallery {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
+            overflow-x: auto; /* Enable horizontal scrolling */
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+            gap: 1rem; /* Space between images and labels */
+            padding-bottom: 1rem; /* Padding for scrollbar */
+            white-space: nowrap; /* Prevent items from wrapping */
         }
-        .modal-overlay.show {
-            opacity: 1;
-            visibility: visible;
+        .image-item {
+            flex-shrink: 0; /* Prevent items from shrinking */
+            text-align: center;
         }
-        .modal-content {
-            background-color: #ffffff;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-            max-width: 600px; /* Max width for modal content */
-            width: 90%; /* Responsive width for modal */
-            max-height: 80%; /* Limit modal height */
-            overflow-y: auto; /* Enable scrolling for long content */
-            position: relative;
-            transform: translateY(-20px);
-            transition: transform 0.3s ease;
+        .image-gallery img {
+            width: 200px; /* Fixed width for images */
+            height: 150px; /* Fixed height for images */
+            object-fit: cover; /* Cover the area, cropping if necessary */
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 0.5rem; /* Space between image and label */
         }
-        .modal-overlay.show .modal-content {
-            transform: translateY(0);
+        .image-label {
+            font-size: 0.875rem; /* Small font size for labels */
+            color: #4a5568; /* Dark gray for labels */
+            white-space: normal; /* Allow label text to wrap */
+            width: 200px; /* Match image width */
         }
-        .close-button {
-            position: absolute;
-            top: 1rem;
-            right: 1.2rem;
-            background: none;
-            border: none;
-            font-size: 1.8rem;
-            cursor: pointer;
-            color: #718096; /* Gray color */
-            transition: color 0.2s ease;
+        /* Hide scrollbar for a cleaner look, but still allow scrolling */
+        .image-gallery::-webkit-scrollbar {
+            height: 8px;
         }
-        .close-button:hover {
-            color: #2d3748; /* Darker gray on hover */
+        .image-gallery::-webkit-scrollbar-thumb {
+            background-color: #cbd5e0;
+            border-radius: 10px;
         }
-        .loading-spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #3498db;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 2rem auto;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .image-gallery::-webkit-scrollbar-track {
+            background-color: #edf2f7;
+            border-radius: 10px;
         }
     </style>
 </head>
@@ -165,9 +140,27 @@
                     <span class="icon">🏞️</span>
                     <p><span class="font-semibold">観光:</span> 天草方面、熊本市内</p>
                 </div>
-                <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg mt-4 w-full transition duration-300 ease-in-out transform hover:scale-105" onclick="generateTouristSpotDetails('天草方面、熊本市内')">
-                    ✨観光地の詳細を生成✨
-                </button>
+            </div>
+            <div class="mt-6">
+                <h3 class="text-xl font-semibold text-gray-800 mb-3">観光地イメージ</h3>
+                <div class="image-gallery">
+                    <div class="image-item">
+                        <img src="https://tse1.mm.bing.net/th/id/OIP.suQ9ZxTU-_bPG-rmwxuttgHaEK?w=266&h=266&c=7" alt="天草の海のイメージ">
+                        <p class="image-label">天草の海</p>
+                    </div>
+                    <div class="image-item">
+                        <img src="https://tse3.mm.bing.net/th/id/OIP.hE1D7h-g-ZcGdqyaIyOlNQHaFj?w=355&h=355&c=7" alt="熊本城のイメージ">
+                        <p class="image-label">熊本城</p>
+                    </div>
+                    <div class="image-item">
+                        <img src="https://tse3.mm.bing.net/th?id=OIP.xgodq4UbHUvQrb549cHdigHaFP&w=335&h=335&c=7" alt="阿蘇山のイメージ">
+                        <p class="image-label">阿蘇山</p>
+                    </div>
+                    <div class="image-item">
+                        <img src="https://tse4.mm.bing.net/th?id=OIP.zOSGiy-XaArZxhNeKZRsrgHaEo&w=296&h=296&c=7" alt="天草の教会のイメージ">
+                        <p class="image-label">天草の教会</p>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -195,9 +188,27 @@
                     <span class="icon">🏯</span>
                     <p><span class="font-semibold">観光:</span> 軍艦島、長崎市内、雲仙方面</p>
                 </div>
-                <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg mt-4 w-full transition duration-300 ease-in-out transform hover:scale-105" onclick="generateTouristSpotDetails('軍艦島、長崎市内、雲仙方面')">
-                    ✨観光地の詳細を生成✨
-                </button>
+            </div>
+            <div class="mt-6">
+                <h3 class="text-xl font-semibold text-gray-800 mb-3">観光地イメージ</h3>
+                <div class="image-gallery">
+                    <div class="image-item">
+                        <img src="https://tse4.mm.bing.net/th?id=OIP.ljtOZf9Bt2_Bpu9ILHtgaAHaE8&w=316&h=316&c=7" alt="軍艦島のイメージ">
+                        <p class="image-label">軍艦島</p>
+                    </div>
+                    <div class="image-item">
+                        <img src="https://tse2.mm.bing.net/th?id=OIP.fgtnvEoi_uMBFuNkbyu8xAHaE7&w=315&h=315&c=7" alt="長崎の夜景のイメージ">
+                        <p class="image-label">長崎の夜景</p>
+                    </div>
+                    <div class="image-item">
+                        <img src="https://tse2.mm.bing.net/th?id=OIP.ofEgTyX5bJ6MQGCwKYBTjAHaE8&w=316&h=316&c=7" alt="平和公園のイメージ">
+                        <p class="image-label">平和公園</p>
+                    </div>
+                    <div class="image-item">
+                        <img src="https://tse1.mm.bing.net/th?id=OIP.Ctxd-AIEU9vEgXLky_VYDwHaE8&w=316&h=316&c=7" alt="雲仙温泉のイメージ">
+                        <p class="image-label">雲仙温泉</p>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -228,9 +239,27 @@
                 <p class="text-sm text-gray-500 mt-2">
                     ※マニラ往路はビジネス、復路はエコノミーでの利用を想定しています。
                 </p>
-                <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg mt-4 w-full transition duration-300 ease-in-out transform hover:scale-105" onclick="generateTouristSpotDetails('ボラカイ島、マニラ市内')">
-                    ✨観光地の詳細を生成✨
-                </button>
+            </div>
+            <div class="mt-6">
+                <h3 class="text-xl font-semibold text-gray-800 mb-3">観光地イメージ</h3>
+                <div class="image-gallery">
+                    <div class="image-item">
+                        <img src="https://tse3.mm.bing.net/th?id=OIP.ZXMCizhEZes3G75JYD8dKQHaE7&w=315&h=315&c=7" alt="ボラカイ島のビーチのイメージ">
+                        <p class="image-label">ボラカイのビーチ</p>
+                    </div>
+                    <div class="image-item">
+                        <img src="https://tse4.mm.bing.net/th?id=OIP.38zj12460r14CcTQi4jD9AHaE8&w=316&h=316&c=7" alt="マニラ市内のイメージ">
+                        <p class="image-label">マニラ市街</p>
+                    </div>
+                    <div class="image-item">
+                        <img src="https://tse1.mm.bing.net/th?id=OIP.oxRawJvar04XFtpu-ZXaZwHaE8&w=316&h=316&c=7" alt="ボラカイのホワイトサンドビーチ">
+                        <p class="image-label">ホワイトサンドビーチ</p>
+                    </div>
+                    <div class="image-item">
+                        <img src="https://tse1.mm.bing.net/th?id=OIP.5m_YNctcFTXB7CD3IKProgHaE7&w=315&h=315&c=7" alt="マニラ イントラムロスのイメージ">
+                        <p class="image-label">イントラムロス</p>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -245,78 +274,28 @@
                 <li><span class="font-semibold">島根:</span> 出雲大社で神聖な体験を</li>
                 <li><span class="font-semibold">北海道:</span> 洞爺湖の絶景と温泉でリラックス</li>
             </ul>
+            <div class="mt-6">
+                <h3 class="text-xl font-semibold text-gray-800 mb-3">候補地イメージ</h3>
+                <div class="image-gallery">
+                    <div class="image-item">
+                        <img src="https://tse3.mm.bing.net/th?id=OIP.SF3WtUBlHR8wMij2d9uOQwHaE8&w=316&h=316&c=7" alt="道後温泉のイメージ">
+                        <p class="image-label">道後温泉</p>
+                    </div>
+                    <div class="image-item">
+                        <img src="https://tse4.mm.bing.net/th?id=OIP.SVnmnhp4wwc7Jpgmkwpt-QHaFL&w=331&h=331&c=7" alt="出雲大社のイメージ">
+                        <p class="image-label">出雲大社</p>
+                    </div>
+                    <div class="image-item">
+                        <img src="https://tse3.mm.bing.net/th?id=OIP.H3PGLwbTHAKBsFGg9X7RpAHaFj&w=355&h=355&c=7" alt="洞爺湖のイメージ">
+                        <p class="image-label">洞爺湖</p>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <p class="text-center text-gray-600 text-lg mt-8">
             これで130,000マイルを最大限に活用し、3つの素晴らしい旅行が楽しめます！😊
         </p>
     </div>
-
-    <!-- Modal for displaying generated content -->
-    <div id="detailModalOverlay" class="modal-overlay">
-        <div class="modal-content">
-            <button class="close-button" onclick="closeModal()">&times;</button>
-            <h3 class="text-xl font-bold text-blue-800 mb-4" id="modalTitle">観光地の詳細</h3>
-            <div id="modalContent">
-                <div class="loading-spinner"></div>
-                <p class="text-center text-gray-600 mt-4">情報を生成中...</p>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // Function to open the modal
-        function openModal() {
-            document.getElementById('detailModalOverlay').classList.add('show');
-        }
-
-        // Function to close the modal
-        function closeModal() {
-            document.getElementById('detailModalOverlay').classList.remove('show');
-            document.getElementById('modalContent').innerHTML = '<div class="loading-spinner"></div><p class="text-center text-gray-600 mt-4">情報を生成中...</p>'; // Reset content
-        }
-
-        async function generateTouristSpotDetails(touristSpots) {
-            openModal(); // Open modal and show loading
-            const modalContentDiv = document.getElementById('modalContent');
-            modalContentDiv.innerHTML = '<div class="loading-spinner"></div><p class="text-center text-gray-600 mt-4">AIが観光地の詳細を生成しています...</p>';
-
-            // Constructing a detailed prompt for the LLM
-            const prompt = `${touristSpots}の観光地について、それぞれの主要な見どころと魅力を300字程度で簡潔に教えてください。具体的に、どのような体験ができるか、なぜ訪れる価値があるのかを強調してください。`;
-
-            let chatHistory = [];
-            chatHistory.push({ role: "user", parts: [{ text: prompt }] });
-            const payload = { contents: chatHistory };
-            const apiKey = ""; // If you want to use models other than gemini-2.0-flash or imagen-3.0-generate-002, provide an API key here. Otherwise, leave this as-is.
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-
-            try {
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(`API error: ${response.status} ${response.statusText} - ${JSON.stringify(errorData)}`);
-                }
-
-                const result = await response.json();
-                if (result.candidates && result.candidates.length > 0 &&
-                    result.candidates[0].content && result.candidates[0].content.parts &&
-                    result.candidates[0].content.parts.length > 0) {
-                    const text = result.candidates[0].content.parts[0].text;
-                    modalContentDiv.innerHTML = `<p class="text-gray-800 leading-relaxed">${text}</p>`;
-                } else {
-                    modalContentDiv.innerHTML = '<p class="text-red-600">情報の生成に失敗しました。もう一度お試しください。</p>';
-                    console.error("Unexpected API response structure:", result);
-                }
-            } catch (error) {
-                modalContentDiv.innerHTML = `<p class="text-red-600">エラーが発生しました: ${error.message}</p>`;
-                console.error("Error calling Gemini API:", error);
-            }
-        }
-    </script>
 </body>
 </html>
